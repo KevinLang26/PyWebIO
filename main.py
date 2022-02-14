@@ -13,7 +13,7 @@ def split(username):
     username = username.replace(" ", "")
     users = username.split(";")
     for i in users:
-        put_text(str(i))
+        put_row([put_text(str(i)), put_buttons(['Subscribe'], lambda _: subscribe(i))])
         retrieve_subtime(retrieve_usersubmissions(str(i)))
 
 
@@ -103,17 +103,14 @@ a_dict = {''}
 def main():
 
     file_exist = os.path.exists('subscriptions.json')
+    put_input('usernames', label='Enter the user(s) you are looking for',placeholder='Multiple users can be entered seperated by ";"')
+    put_buttons(['Search'], lambda _: split(pin.usernames))
+    put_row([put_code('Subscribed Feed')])
 
+    #put_input('User', label='Subscription', placeholder='User')
+    #[put_buttons(['Subscribe'], lambda _: subscribe(pin.User))
+    #put_buttons(['Unfollow'], lambda _: unfollow(pin.User))
 
-    put_grid([
-        [put_input('User', label='Subscription', placeholder='User'),
-         put_input('usernames', label='Enter the user(s) you are looking for',
-                   placeholder='Multiple users can be entered seperated by ";"')],
-        [put_buttons(['Subscribe'], lambda _: subscribe(pin.User)),
-         put_buttons(['Search'], lambda _: split(pin.usernames))],
-        [put_buttons(['Unfollow'], lambda _: unfollow(pin.User))],
-        [put_row([put_code('Subscribed Feed')])],
-    ])
 
     if not file_exist:
         put_text("You are not following anyone")
@@ -123,6 +120,7 @@ def main():
             feed(a_dict["subscribed"])
     [put_code('Feed')]
     lists.clear()
+
 
 
 start_server(main, port=8080, debug=True)
