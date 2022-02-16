@@ -30,7 +30,7 @@ def retrieve_usersubmissions(user):
 
 
 def retrieve_storylink(submission):
-            #using information from retreive_usersubmissions finds valid recent story links and output them
+            #using information from retreive_usersubmissions, finds valid recent story links and output them
     for x in submission:
         api2 = (requests.get('https://hacker-news.firebaseio.com/v0/item/' + str(x) + '.json?print=pretty'))
         data2 = api2.text
@@ -47,7 +47,7 @@ def retrieve_storylink(submission):
 
 
 def check_dup(url):
-            #mkaes sure duplicate stories arent output
+            #makes sure duplicate stories arent output
     if url in lists:
         return False
     else:
@@ -56,7 +56,7 @@ def check_dup(url):
 
 
 def subscribe(user, id):
-            #cretes subscriptions list and adds users for subscription feed
+            #creates subscriptions list and adds users for subscription feed
     file_exist = os.path.exists('subscriptions.json')
     if not file_exist:
         a_dict = {}
@@ -116,6 +116,7 @@ def main():
     file_exist = os.path.exists('subscriptions.json')
 
     put_input('usernames', label='Enter the user(s) you are looking for',placeholder='Multiple users can be entered seperated by ";"')
+                        #Create persistant input box
     put_buttons(['Search'], lambda _: output(pin.usernames))
     put_row([put_code('Subscribed Feed')])
 
