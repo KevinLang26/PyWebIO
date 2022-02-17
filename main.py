@@ -111,6 +111,7 @@ lists = ['']
 a_dict = {''}
 list = set()
 
+"""
 def main():
 
     file_exist = os.path.exists('subscriptions.json')
@@ -133,3 +134,4 @@ def main():
 
 
 start_server(main, port=8080, debug=True)
+"""
