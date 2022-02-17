@@ -80,7 +80,7 @@ def subscribe(user, id):
 
 
 
-def unfollow(user, id):
+def unsubscribe(user, id):
             #same to subscribe function but the opposite// removes users
     file_exist = os.path.exists('subscriptions.json')
     if not file_exist:
@@ -97,13 +97,13 @@ def unfollow(user, id):
         with open("subscriptions.json", 'w+') as file:
             json.dump(a_dict, file)
 
-    put_text("unfollowed %s" % id)
+    put_text("unsubscribed %s" % id)
 
 
 def feed(users):
             #output Subscription feed links
     for i in users:
-        put_row([put_text(str(i)), put_buttons(['Unfollow'], onclick = partial(unfollow, id=i))])
+        put_row([put_text(str(i)), put_buttons(['UnSubscribe'], onclick = partial(unsubscribe, id=i))])
         retrieve_storylink(retrieve_usersubmissions(str(i)))
 
 
