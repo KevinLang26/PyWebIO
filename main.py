@@ -61,18 +61,18 @@ def subscribe(user, id):
     if not file_exist:
         a_dict = {}
         a_dict["subscribed"] = [id]
-        with open("subscriptions.json", 'w+') as file:
+        with open(file_path, 'w+') as file:
             json.dump(a_dict, file)
         put_text("subscribed to %s" % id)
     else:
-       with open('subscriptions.json', 'r+') as files:
+       with open(file_path, 'r+') as files:
             a_dict = json.load(files)
             if id in a_dict["subscribed"]:
                 put_text("Already subscribed to %s" % id)
                 return
             else:
                 a_dict["subscribed"].append(id)
-       with open("subscriptions.json", 'w+') as file:
+       with open(file_path, 'w+') as file:
            json.dump(a_dict, file)
        put_text("subscribed to %s" % id)
 
@@ -87,14 +87,14 @@ def unsubscribe(user, id):
         put_text("You are not subscribed to anyone")
     else:
         a_dict = {}
-        with open('subscriptions.json', 'r+') as files:
+        with open(file_path, 'r+') as files:
             a_dict = json.load(files)
             if id not in a_dict["subscribed"]:
                 put_text("You are not subscribed to %s" % id)
                 return
             else:
                 a_dict["subscribed"].remove(id)
-        with open("subscriptions.json", 'w+') as file:
+        with open(file_path, 'w+') as file:
             json.dump(a_dict, file)
 
     put_text("unsubscribed %s" % id)
